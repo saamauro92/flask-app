@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
 <h2> {{ page_title}} </h2>
 
 <p>
@@ -12,37 +14,46 @@
     superstitious Dwarves also considered thirteen to be an unlucky number, and as Gandalf had planned to leave on other
     business, welcomed a fourteenth to fill into their party.
 </p>
+{% for member in company %}
+
 
 <div class="row featurette">
 
+    {% if loop.index % 2 != 0 %}
     <div class="col-md-7">
-        <h3>Thorin Oakenshield</h3>
+
+        <h3> {{ loop.index }}. {{ member.name }}</h3>
         <p>
-            Thorin II "Oakenshield", eventually called King under the Mountain or Mountain King[1], was the son of Thráin II,
-            the older brother of Frerin and Dís, the grandson of King Thrór and the uncle of Fíli and Kíli. Thorin was best
-            known for his deeds as leader of a company that infiltrated the lost Kingdom under the Mountain to take it back from
-            Smaug and for leading an alliance of Men, Dwarves, and Elves in the Battle of Five Armies.
+            {{ member.description }}
         </p>
 
     </div>
     <div class="col-md-5">
-        <img src="https://static.wikia.nocookie.net/lotr/images/e/ec/1400193_695248260488487_320403599_o.jpg" alt="">
+        <img alt="" class="featurette-image image-responsive" src="{{ member.image_source }}">
     </div>
-</div>
+    {% else %}
 
-
-<div class="row featurette">
     <div class="col-md-5">
-        <img src="https://static.wikia.nocookie.net/lotr/images/8/8e/F%C3%ADliAndK%C3%ADliByMontanini.jpg" alt="">
-
+        <img alt="" class="featurette-image image-responsive" src="{{ member.image_source }}">
     </div>
+
     <div class="col-md-7">
-        <h3>Fill and Kill</h3>
 
+        <h3> {{ loop.index }}. {{ member.name }}</h3>
         <p>
-            Fíli and Kíli were Dwarvern brothers and were also the youngest of the thirteen Dwarves who set out with Thorin
-            Oakenshield's company, along with Gandalf and Bilbo Baggins, to reclaim the Lonely Mountain from the dragon Smaug.
+            {{ member.description }}
         </p>
+
     </div>
+
+    {% endif %}
+
+
 </div>
+{% if loop.index != loop.length %}
+    <hr class="featurette-divider">
+{% endif %}
+
+{% endfor %}
+
 {% endblock %}
